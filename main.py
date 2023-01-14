@@ -1,3 +1,3 @@
-from worked_cache import WorkedCache
+from sync import WorkedCache
 
 WorkedCache().sync()
