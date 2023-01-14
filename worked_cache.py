@@ -1,8 +1,9 @@
+import os.path
 import subprocess
 from typing import NamedTuple
-from loguru import logger
-import os.path
+
 import yaml
+from loguru import logger
 
 
 class SynchronizedPair(NamedTuple):
@@ -16,14 +17,15 @@ class SynchronizedPair(NamedTuple):
         else:
             source_path = self.source_path
         subprocess.call(
-        [
-            "rsync",
-            "-cavz",
-            "--delete",
-            source_path,
-            self.destination_dir,
-        ]
-    )
+            [
+                "rsync",
+                "-cavz",
+                "--delete",
+                source_path,
+                self.destination_dir,
+            ]
+        )
+
 
 class WorkedCache:
     """
@@ -42,12 +44,10 @@ class WorkedCache:
 
     @staticmethod
     def __parse_sync_pairs() -> list[SynchronizedPair]:
-        with open('pairs_with_worked_cache.yml') as f:
+        with open("pairs_with_worked_cache.yml") as f:
             data = yaml.load(f, Loader=yaml.FullLoader)
-        
+
         pairs = []
-        for pair in data['pairs']:
-            pairs.append(SynchronizedPair(pair['src'], pair['dest']))
+        for pair in data["pairs"]:
+            pairs.append(SynchronizedPair(pair["src"], pair["dest"]))
         return pairs
-
-
