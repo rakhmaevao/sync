@@ -1,2 +1,3 @@
 pairs_with_worked_cache.yml
 __pycache__/
+.mypy_cache
