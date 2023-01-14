@@ -2,5 +2,8 @@ format:
 	isort .
 	black .
 
-make mypy:
+mypy:
 	mypy .
+
+run:
+	poetry run python main.py
