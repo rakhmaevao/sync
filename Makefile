@@ -1,9 +1,9 @@
 format:
-	isort .
-	black .
+	poetry run isort .
+	poetry run ruff format .
 
 mypy:
-	mypy .
+	poetry run mypy main.py sync
 
 run:
 	poetry run python main.py

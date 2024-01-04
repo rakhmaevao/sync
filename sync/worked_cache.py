@@ -1,9 +1,12 @@
 import os.path
 import subprocess
+from datetime import datetime
 from typing import NamedTuple
 
 import yaml
 from loguru import logger
+
+from sync.logging import WorkedCacheToMainStorage, sync_logger
 
 
 class SynchronizedPair(NamedTuple):
@@ -39,8 +42,10 @@ class WorkedCache:
         self.__pairs = self.__parse_sync_pairs()
 
     def sync(self):
+        t_0 = datetime.now()
         for pair in self.__pairs:
             pair.sync()
+        sync_logger.add_event(WorkedCacheToMainStorage(datetime.now() - t_0))
 
     @staticmethod
     def __parse_sync_pairs() -> list[SynchronizedPair]:

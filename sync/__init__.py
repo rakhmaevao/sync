@@ -1,2 +1,2 @@
-from .worked_cache import WorkedCache
 from .github_sync import GitHubSynchronizer
+from .worked_cache import WorkedCache

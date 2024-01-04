@@ -1,4 +1,4 @@
-from sync import WorkedCache, GitHubSynchronizer
+from sync import GitHubSynchronizer, WorkedCache
 
 WorkedCache().sync()
 GitHubSynchronizer().sync()

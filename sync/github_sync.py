@@ -1,8 +1,12 @@
-from loguru import logger
-from github import Github
 import os
 import subprocess
+from datetime import datetime
 from typing import NamedTuple
+
+from github import Github
+from loguru import logger
+
+from sync.logging import GitHubToMainStorage, sync_logger
 
 
 class GithubRepo(NamedTuple):
@@ -19,7 +23,7 @@ class GithubRepo(NamedTuple):
                 shell=True,
             )
         else:
-            logger.warning("Repositorie is not exist. Cloning...")   
+            logger.warning("Repositorie is not exist. Cloning...")
             subprocess.call(
                 f"cd ../Storage/Repositories && "
                 f"git clone {self.ssh_url} && cd {self.name} && git pull --all && "
@@ -36,5 +40,7 @@ class GitHubSynchronizer:
             self.__repositories_ssh_urls.append(GithubRepo(repo.name, repo.ssh_url))
 
     def sync(self):
+        t_0 = datetime.now()
         for repo in self.__repositories_ssh_urls:
             repo.sync()
+        sync_logger.add_event(GitHubToMainStorage(datetime.now() - t_0))
