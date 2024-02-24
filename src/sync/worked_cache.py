@@ -22,8 +22,10 @@ class SynchronizedPair(NamedTuple):
         subprocess.call(
             [
                 "rsync",
-                "-cavz",
-                "--delete",
+                "-a",  # a - не сохранение доступа, ссылок, расширенных атрибутов
+                "—checksum",  # сравнения файлов по контрольной сумме
+                "—compress",  # сжатие файлов при передаче
+                "--delete",  # файлы, удалённые в src, должны быть удалены и из dst
                 source_path,
                 self.destination_dir,
             ]

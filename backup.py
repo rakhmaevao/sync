@@ -9,7 +9,17 @@ FIRST_BACKUP_VAULT_DIR = "/media/rahmaevao/70AEE6D577AD4A48/"
 
 
 def _rsync(src: str, dest: str):
-    subprocess.call(["rsync", "-cavz", "--delete", src, dest])
+    subprocess.call(
+        [
+            "rsync",
+            "-a",  # a - не сохранение доступа, ссылок, расширенных атрибутов
+            "—checksum",  # сравнения файлов по контрольной сумме
+            "—compress",  # сжатие файлов при передаче
+            "--delete",  # файлы, удалённые в src, должны быть удалены и из dst
+            src,
+            dest,
+        ]
+    )
 
 
 if __name__ == "__main__":
