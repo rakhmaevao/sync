@@ -6,7 +6,7 @@ from typing import NamedTuple
 from github import Github
 from loguru import logger
 
-from sync.logging import GitHubToMainStorage, sync_logger
+from src.logging import GitHubToMainStorage, sync_logger
 
 
 class GithubRepo(NamedTuple):

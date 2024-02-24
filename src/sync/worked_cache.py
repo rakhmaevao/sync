@@ -6,7 +6,7 @@ from typing import NamedTuple
 import yaml
 from loguru import logger
 
-from sync.logging import WorkedCacheToMainStorage, sync_logger
+from src.logging import WorkedCacheToMainStorage, sync_logger
 
 
 class SynchronizedPair(NamedTuple):
